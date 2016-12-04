@@ -39,6 +39,10 @@ void TetrisCanvas::init_gui()
 
   QString stylesheet = "color: blue; font-size: 24pt; font: bold";
 
+  lbl_level = new QLabel("Level: 0", this);
+  lbl_level->setStyleSheet(stylesheet);
+  right_layout->addWidget(lbl_level);
+
   lbl_score = new QLabel("Score: 0", this);
   lbl_score->setStyleSheet(stylesheet);
   right_layout->addWidget(lbl_score);
@@ -75,8 +79,8 @@ TetrisCanvas::TetrisCanvas(QWidget * parent)
   init_gui();
   connect(board_canvas, SIGNAL(signal_cheat(bool)),
           this, SLOT(slot_cheat(bool)));
-  connect(board_canvas, SIGNAL(signal_score(size_t)),
-          this, SLOT(slot_score(size_t)));
+  connect(board_canvas, SIGNAL(signal_score(size_t, size_t)),
+          this, SLOT(slot_score(size_t, size_t)));
   connect(board_canvas, SIGNAL(signal_status(QString)),
           this, SLOT(slot_status(QString)));
 }
@@ -94,9 +98,12 @@ void TetrisCanvas::slot_status(QString txt)
   lbl_status->setText(txt);
 }
 
-void TetrisCanvas::slot_score(size_t score)
+void TetrisCanvas::slot_score(size_t score, size_t level)
 {
   QString txt = "Score: ";
   txt.append(QString::number(score));
   lbl_score->setText(txt);
+  txt = "Level: ";
+  txt.append(QString::number(level));
+  lbl_level->setText(txt);
 }

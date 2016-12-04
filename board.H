@@ -47,6 +47,7 @@ private:
   size_t num_cols;
   Bucket ** mat;
   size_t score = 0;
+  size_t level = 0;
   bool game_over = false;
   bool _cheat = false;
   Piece current_block;
@@ -54,6 +55,12 @@ private:
   void allocate();
 
   void destroy();
+
+  void update_level();
+
+  bool is_line(size_t i);
+
+  void lines(size_t idx);
 
 public:
   Board(size_t r, size_t c);
@@ -101,6 +108,8 @@ public:
   void store_current();
 
   size_t get_score() const;
+
+  size_t get_level() const;
 };
 
 # endif // BOARD_H

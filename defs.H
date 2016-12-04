@@ -57,6 +57,16 @@ bool exists(const QVector<T> & v, const Op & op)
   return false;
 }
 
+template <typename T, class Op>
+bool all(T * a, size_t sz, const Op & op)
+{
+  for (size_t i = 0; i < sz; ++i)
+    if (not op(a[i]))
+      return false;
+
+  return true;
+}
+
 QVector<QVector<Pos>> make_rotations(const QVector<Pos> &);
 
 

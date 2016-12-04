@@ -43,6 +43,8 @@ public:
   AllPieces & operator = (const AllPieces &) = delete;
 
   static Piece next_piece(Board *);
+
+  static QVector<Pos>::size_type greater_piece_size();
 };
 
 #endif // ALLPIECES_H

@@ -41,6 +41,7 @@ class TetrisCanvas : public QWidget
   QVBoxLayout * left_layout;
   QVBoxLayout * right_layout;
 
+  QLabel * lbl_level;
   QLabel * lbl_score;
   QLabel * lbl_status;
   QLabel * lbl_cheat;
@@ -58,7 +59,7 @@ public slots:
 
   void slot_status(QString);
 
-  void slot_score(size_t);
+  void slot_score(size_t, size_t);
 };
 
 #endif // TETRISCANVAS_H

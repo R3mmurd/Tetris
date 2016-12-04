@@ -43,8 +43,9 @@ QVector<QVector<QVector<Pos>>> AllPieces::all_rotations = {
 QVector<QVector<Pos>> AllPieces::cheat_piece = {{{0,0}}};
 
 QVector<QColor> AllPieces::colors = {
-  Qt::darkGreen, Qt::blue, Qt::darkRed, Qt::yellow, Qt::darkMagenta,
-  Qt::darkCyan, Qt::darkYellow
+  QColor(255,0,0), QColor(255,128,0), QColor(255,255,0), QColor(128,255,0),
+  QColor(0,255,0), QColor(0,255,128), QColor(0,255,255), QColor(0,128,255),
+  QColor(0,0,255), QColor(127,0,255), QColor(255,0,255), QColor(255,0,127)
 };
 
 Piece AllPieces::next_piece(Board * b)
@@ -59,4 +60,17 @@ Piece AllPieces::next_piece(Board * b)
 
   std::uniform_int_distribution<size_t> dist_p(0, all_rotations.size() - 1);
   return Piece(b, all_rotations[dist_p(rng)], colors[dist_c(rng)]);
+}
+
+QVector<Pos>::size_type AllPieces::greater_piece_size()
+{
+  QVector<Pos>::size_type ret;
+
+  for (const QVector<QVector<Pos>> & v : all_rotations)
+    {
+      auto sz = v.first().size();
+      if (sz > ret)
+        ret = sz;
+    }
+  return ret;
 }

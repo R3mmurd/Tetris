@@ -31,7 +31,7 @@ BoardCanvas::BoardCanvas(QWidget * parent)
 {
   setFixedSize(board.cols() * Board::Scale, board.rows() * Board::Scale);
 
-  timer.setInterval(700);
+  timer.setInterval(base_interval);
   connect(&timer, SIGNAL(timeout()), this, SLOT(slot_timer_timeout()));
   timer.start();
 }
@@ -51,7 +51,7 @@ void BoardCanvas::handle_input(QKeyEvent * evt)
         {
           board.reset();
           timer.start();
-          emit signal_score(0);
+          emit signal_score(0, 0);
           emit signal_cheat(false);
           emit signal_status("Playing");
           repaint();
@@ -87,14 +87,14 @@ void BoardCanvas::handle_input(QKeyEvent * evt)
     case Qt::Key_Up: board.rotate_left(); break;
     case Qt::Key_Space:
       board.drop();
-      emit signal_score(board.get_score());
+      emit signal_score(board.get_score(), board.get_level());
       break;
     case Qt::Key_U: board.rotate_180(); break;
     case Qt::Key_C:
       if (board.do_cheat())
         {
           emit signal_cheat(true);
-          emit signal_score(board.get_score());
+          emit signal_score(board.get_score(), board.get_level());
         }
       break;
     }
@@ -111,8 +111,10 @@ void BoardCanvas::slot_timer_timeout()
       return;
     }
 
-  board.move_down();  
+  timer.setInterval(base_interval - board.get_level() * 30);
+
+  board.move_down();
   emit signal_cheat(board.cheat());
-  emit signal_score(board.get_score());
+  emit signal_score(board.get_score(), board.get_level());
   repaint();
 }

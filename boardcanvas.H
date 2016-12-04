@@ -38,6 +38,8 @@ class BoardCanvas : public QWidget
 
   QTimer timer;
 
+  static constexpr size_t base_interval = 1000;
+
   bool pause = false;
 
 public:
@@ -49,7 +51,7 @@ protected:
   void paintEvent(QPaintEvent *) override;
 
 signals:
-  void signal_score(size_t);
+  void signal_score(size_t, size_t);
 
   void signal_cheat(bool);
 

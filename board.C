@@ -45,6 +45,49 @@ void Board::destroy()
   delete [] mat;
 }
 
+void Board::update_level()
+{
+  size_t new_level = score / 1000;
+  level = std::max(level, new_level);
+}
+
+bool Board::is_line(size_t i)
+{
+  return all(mat[i], num_cols, [] (auto item) { return item.busy; });
+}
+
+void Board::lines(size_t idx)
+{
+  size_t max_lines = AllPieces::greater_piece_size();
+
+  size_t lines_counter = 0;
+
+  for (size_t i = 0; idx < num_rows and i < max_lines; ++i, ++idx)
+    {
+      if (not is_line(idx))
+        continue;
+
+      ++lines_counter;
+
+      // Dejar caer todo lo de arriba
+      for (size_t ip = idx; ip > 0; --ip)
+        {
+          bool all_over_empty = true;
+
+          for (size_t j = 0; j < num_cols; ++j)
+            {
+              all_over_empty = all_over_empty and not mat[ip - 1][j].busy;
+              mat[ip][j] = mat[ip-1][j];
+            }
+
+          if (all_over_empty)
+            break;
+        }
+    }
+
+  score += 20 * lines_counter * lines_counter;
+}
+
 Board::Board(size_t r, size_t c)
   : num_rows(r), num_cols(c), mat(nullptr),
     current_block(AllPieces::next_piece(this))
@@ -168,7 +211,6 @@ void Board::drop()
 {
   while(current_block.move(1, 0, 0))
     ++score;
-
   store_current();
 }
 
@@ -184,29 +226,30 @@ void Board::store_current()
 
   for (size_t i = 1; i < num_rows; ++i)
     {
-      bool line = true;
-
-      for (size_t j = 0; j < num_cols; ++j)
-        line = line and mat[i][j].busy;
-
-      if (not line)
+      if (not is_line(i))
         continue;
 
-      score += 50;
-
-      for (size_t ip = i; ip > 0; --ip)
-        for (size_t j = 0; j < num_cols; ++j)
-          mat[ip][j] = mat[ip - 1][j];
+      lines(i);
+      break;
     }
 
   for (size_t j = 0; j < num_cols; ++j)
     game_over = game_over or mat[1][j].busy;
 
-  if (not game_over)
-    current_block = AllPieces::next_piece(this);
+  if (game_over)
+    return;
+
+  current_block = AllPieces::next_piece(this);
+  update_level();
+
 }
 
 size_t Board::get_score() const
 {
   return score;
+}
+
+size_t Board::get_level() const
+{
+  return level;
 }
