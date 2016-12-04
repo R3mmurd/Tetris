@@ -78,7 +78,7 @@ bool Piece::move(int di, int dj, int dr)
   int rot_idx = current_rotation_index + dr;
 
   if (rot_idx < 0)
-    rot_idx = rotations.size() - abs(rot_idx) % rotations.size();
+    rot_idx = (rotations.size() - abs(rot_idx)) % rotations.size();
   else
     rot_idx %= rotations.size();
 
