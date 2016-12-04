@@ -47,7 +47,15 @@ void BoardCanvas::handle_input(QKeyEvent * evt)
 {
   if (board.is_game_over())
     {
-      emit signal_status("Game over!");
+      if (evt->key() == Qt::Key_R)
+        {
+          board.reset();
+          timer.start();
+          emit signal_score(0);
+          emit signal_cheat(false);
+          emit signal_status("Playing");
+          repaint();
+        }
       return;
     }
 

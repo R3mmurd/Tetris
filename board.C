@@ -100,6 +100,10 @@ void Board::reset()
 {
   destroy();
   allocate();
+  score = 0;
+  game_over = false;
+  _cheat = false;
+  current_block = AllPieces::next_piece(this);
 }
 
 bool Board::is_busy(size_t i, size_t j) const

@@ -20,6 +20,7 @@ The hotkey list is:
   then the next piece will be the cheat piece and you'll be penalized with 100
   points less in your score.
 - Key p: pause or resume game.
+- Key r: reinit the game when it has finished.
 
 The game ends according the classic game rule for ending.
 
