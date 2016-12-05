@@ -111,7 +111,7 @@ void BoardCanvas::slot_timer_timeout()
       return;
     }
 
-  timer.setInterval(base_interval - board.get_level() * 30);
+  timer.setInterval(base_interval - board.get_level() * 80);
 
   board.move_down();
   emit signal_cheat(board.cheat());
