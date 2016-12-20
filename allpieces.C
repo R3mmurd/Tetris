@@ -48,6 +48,8 @@ QVector<QColor> AllPieces::colors = {
   QColor(0,0,255), QColor(127,0,255), QColor(255,0,255), QColor(255,0,127)
 };
 
+QVector<Pos>::size_type AllPieces::gr_sz_piece = 0;
+
 Piece AllPieces::next_piece(Board * b)
 {
   std::uniform_int_distribution<size_t> dist_c(0, colors.size() - 1);
@@ -64,13 +66,14 @@ Piece AllPieces::next_piece(Board * b)
 
 QVector<Pos>::size_type AllPieces::greater_piece_size()
 {
-  QVector<Pos>::size_type ret;
+  if (gr_sz_piece > 0)
+    return gr_sz_piece;
 
   for (const QVector<QVector<Pos>> & v : all_rotations)
     {
       auto sz = v.first().size();
-      if (sz > ret)
-        ret = sz;
+      if (sz > gr_sz_piece)
+        gr_sz_piece = sz;
     }
-  return ret;
+  return gr_sz_piece;
 }

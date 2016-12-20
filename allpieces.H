@@ -35,7 +35,7 @@ class AllPieces
   static QVector<QVector<QVector<Pos>>> all_rotations;
   static QVector<QVector<Pos>> cheat_piece;
   static QVector<QColor> colors;
-
+  static QVector<Pos>::size_type gr_sz_piece;
 
 public:
   AllPieces() = delete;
