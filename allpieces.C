@@ -25,8 +25,6 @@
 # include <allpieces.H>
 # include <board.H>
 
-std::mt19937 AllPieces::rng(time(nullptr));
-
 QVector<QVector<QVector<Pos>>> AllPieces::all_rotations = {
   {{{0,0},{1,0},{0,1},{1,1}}}, // Square, sólo una rotación
   make_rotations({{0,0},{-1,0},{1,0},{0,-1}}), // T
@@ -50,7 +48,7 @@ QVector<QColor> AllPieces::colors = {
 
 QVector<Pos>::size_type AllPieces::gr_sz_piece = 0;
 
-Piece AllPieces::next_piece(Board * b)
+Piece AllPieces::next_piece(Board * b, std::mt19937 & rng)
 {
   std::uniform_int_distribution<size_t> dist_c(0, colors.size() - 1);
 

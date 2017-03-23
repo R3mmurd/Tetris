@@ -26,12 +26,15 @@
 # include <QPainter>
 # include <QKeyEvent>
 
+const size_t BoardCanvas::MIN_TIME_INTERVAL = 40;
+const size_t BoardCanvas::BASE_INTERVAL = 1000;
+
 BoardCanvas::BoardCanvas(QWidget * parent)
   : QWidget(parent), board(30, 15)
 {
   setFixedSize(board.cols() * Board::Scale, board.rows() * Board::Scale);
 
-  timer.setInterval(base_interval);
+  timer.setInterval(BASE_INTERVAL);
   connect(&timer, SIGNAL(timeout()), this, SLOT(slot_timer_timeout()));
   timer.start();
 }
@@ -111,7 +114,8 @@ void BoardCanvas::slot_timer_timeout()
       return;
     }
 
-  timer.setInterval(base_interval - board.get_level() * 80);
+  timer.setInterval(std::max(BASE_INTERVAL - board.get_level() * 80,
+                             MIN_TIME_INTERVAL));
 
   board.move_down();
   emit signal_cheat(board.cheat());

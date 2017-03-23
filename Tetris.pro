@@ -24,7 +24,7 @@
 
 QMAKE_CXX = clang++
 
-QT += core widgets
+QT += core widgets multimedia
 
 CONFIG += c++14
 
@@ -44,3 +44,6 @@ SOURCES += \
     allpieces.C \
     boardcanvas.C \
     tetriscanvas.C
+
+RESOURCES += \
+    multimedia.qrc

@@ -31,7 +31,6 @@
 
 class AllPieces
 {
-  static std::mt19937 rng;
   static QVector<QVector<QVector<Pos>>> all_rotations;
   static QVector<QVector<Pos>> cheat_piece;
   static QVector<QColor> colors;
@@ -42,7 +41,7 @@ public:
   AllPieces(const AllPieces &) = delete;
   AllPieces & operator = (const AllPieces &) = delete;
 
-  static Piece next_piece(Board *);
+  static Piece next_piece(Board *, std::mt19937 &);
 
   static QVector<Pos>::size_type greater_piece_size();
 };

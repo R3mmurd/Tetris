@@ -84,17 +84,30 @@ void Board::lines(size_t idx)
             break;
         }
     }
-
   score += 20 * lines_counter * lines_counter;
+
+  if (lines_counter >= 4)
+    four_lines_sound->play();
+  else if (lines_counter > 0)
+    one_line_sound->play();
 }
 
 Board::Board(size_t r, size_t c)
-  : num_rows(r), num_cols(c), mat(nullptr),
-    current_block(AllPieces::next_piece(this))
+  : rng(time(nullptr)), num_rows(r), num_cols(c), mat(nullptr),
+    current_block(AllPieces::next_piece(this, rng))
 
 {
   if (num_rows < 5 or num_cols < 5)
     throw std::domain_error("Size must be at least 5x5");
+
+  one_line_sound = new QSound(":/audio/line");
+  four_lines_sound = new QSound(":/audio/four_lines");
+  game_over_sound = new QSound(":/audio/game_over");
+  block_bottom_sound = new QSound(":/audio/hits_bottom");
+  env_sound = new QSound(":/audio/music");
+  env_sound->setLoops(QSound::Infinite);
+
+  env_sound->play();
 
   allocate();
 }
@@ -146,7 +159,7 @@ void Board::reset()
   score = 0;
   game_over = false;
   _cheat = false;
-  current_block = AllPieces::next_piece(this);
+  current_block = AllPieces::next_piece(this, rng);
 }
 
 bool Board::is_busy(size_t i, size_t j) const
@@ -205,6 +218,7 @@ void Board::move_down()
     return;
 
   store_current();
+  block_bottom_sound->play();
 }
 
 void Board::drop()
@@ -212,6 +226,7 @@ void Board::drop()
   while(current_block.move(1, 0, 0))
     ++score;
   store_current();
+  block_bottom_sound->play();
 }
 
 void Board::store_current()
@@ -237,9 +252,13 @@ void Board::store_current()
     game_over = game_over or mat[1][j].busy;
 
   if (game_over)
-    return;
+    {
+      env_sound->stop();
+      game_over_sound->play();
+      return;
+    }
 
-  current_block = AllPieces::next_piece(this);
+  current_block = AllPieces::next_piece(this, rng);
   update_level();
 
 }

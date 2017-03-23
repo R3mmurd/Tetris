@@ -38,7 +38,8 @@ class BoardCanvas : public QWidget
 
   QTimer timer;
 
-  static constexpr size_t base_interval = 1000;
+  static const size_t MIN_TIME_INTERVAL;
+  static const size_t BASE_INTERVAL;
 
   bool pause = false;
 

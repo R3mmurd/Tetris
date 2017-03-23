@@ -26,6 +26,7 @@
 # define BOARD_H
 
 # include <QColor>
+# include <QSound>
 
 # include <piece.H>
 
@@ -43,6 +44,8 @@ public:
   };
 
 private:
+  std::mt19937 rng;
+
   size_t num_rows;
   size_t num_cols;
   Bucket ** mat;
@@ -61,6 +64,12 @@ private:
   bool is_line(size_t i);
 
   void lines(size_t idx);
+
+  QSound * one_line_sound;
+  QSound * four_lines_sound;
+  QSound * game_over_sound;
+  QSound * block_bottom_sound;
+  QSound * env_sound;
 
 public:
   Board(size_t r, size_t c);

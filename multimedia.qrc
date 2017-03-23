@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/audio">
+        <file alias="hits_bottom">audio/block_hits_bottom.wav</file>
+        <file alias="four_lines">audio/clear_four_lines.wav</file>
+        <file alias="line">audio/clear_one_line.wav</file>
+        <file alias="music">audio/music.wav</file>
+        <file alias="game_over">audio/game_over.wav</file>
+    </qresource>
+</RCC>
