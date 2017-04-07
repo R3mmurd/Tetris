@@ -160,6 +160,7 @@ void Board::reset()
   game_over = false;
   _cheat = false;
   current_block = AllPieces::next_piece(this, rng);
+  env_sound->play();
 }
 
 bool Board::is_busy(size_t i, size_t j) const
@@ -172,9 +173,13 @@ void Board::set(size_t i, size_t j, const QColor & c)
   mat[i][j] = { c, true };
 }
 
-void Board::draw(QPainter & painter)
+void Board::draw(QPainter & painter, bool is_paused)
 {
   painter.fillRect(0, 0, num_cols * Scale, num_rows * Scale, Qt::darkGray);
+
+  if (is_paused)
+    return;
+
   current_block.draw(painter);
 
   for (size_t y = 0; y < num_rows; ++y)

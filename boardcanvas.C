@@ -43,7 +43,7 @@ void BoardCanvas::paintEvent(QPaintEvent *)
 {
   QPainter painter(this);
   painter.setPen(Qt::black);
-  board.draw(painter);
+  board.draw(painter, pause);
 }
 
 void BoardCanvas::handle_input(QKeyEvent * evt)
@@ -76,6 +76,7 @@ void BoardCanvas::handle_input(QKeyEvent * evt)
           pause = false;
           emit signal_status("Playing");
         }
+      repaint();
       return;
     }
 

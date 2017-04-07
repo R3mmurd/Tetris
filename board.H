@@ -98,7 +98,7 @@ public:
 
   void set(size_t, size_t, const QColor &);
 
-  void draw(QPainter &);
+  void draw(QPainter &, bool);
 
   void rotate_right();
 
