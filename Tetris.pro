@@ -1,4 +1,3 @@
-
 #  This file is part of Tetris game.
 #  Copyright (C) 2016 by Alejandro J. Mujica
 
