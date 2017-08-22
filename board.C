@@ -69,7 +69,7 @@ void Board::lines(size_t idx)
 
       ++lines_counter;
 
-      // Dejar caer todo lo de arriba
+      // Drop all pieces above
       for (size_t ip = idx; ip > 0; --ip)
         {
           bool all_over_empty = true;

@@ -72,7 +72,7 @@ const QColor & Piece::get_color() const
 
 bool Piece::move(int di, int dj, int dr)
 {
-  if (di < 0) // No puedes mover hacia arriba
+  if (di < 0) // You may not move to up
     return false;
 
   int rot_idx = current_rotation_index + dr;
