@@ -1,4 +1,4 @@
-Tetris: A variation of the game. For beginner game developers.
+# Tetris: A variation of the game. For beginner game developers.
 
 This is an example af the classic game "Tetris" with some variants.
 For example, in the classic game, all of the pieces are made of four squares.
