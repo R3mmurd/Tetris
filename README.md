@@ -1,6 +1,6 @@
 # Tetris: A variation of the game. For beginner game developers.
 
-This is an example af the classic game "Tetris" with some variants.
+This is an example of the classic game "Tetris" with some variants.
 For example, in the classic game, all of the pieces are made of four squares.
 In this version (designed for a homework in the course "Programming Languages"
 by University of Washington) there is two five-squares pieces,
