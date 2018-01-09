@@ -3,7 +3,7 @@
 This is an example of the classic game "Tetris" with some variants.
 For example, in the classic game, all of the pieces are made of four squares.
 In this version (designed for a homework in the course "Programming Languages"
-by University of Washington) there is two five-squares pieces,
+by University of Washington) there are two five-squares pieces,
 a three-square piece and a cheat piece (one square).
 
 How to play? The game is designed for playing with the keyboard.
