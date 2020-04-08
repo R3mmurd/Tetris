@@ -24,7 +24,7 @@ The control keys are:
 
 The game ends according the classic game rule for ending.
 
-System requeriments:
+System requirements:
 - C++ v14
 - Qt5
 
