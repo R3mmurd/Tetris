@@ -1,14 +1,14 @@
-# Tetris: A variation of the game. For beginner game developers.
+# Tetris
 
-This is an example of the classic game "Tetris" with some variants.
-For example, in the classic game, all of the pieces are made of four squares.
+This is a remake of the classic game [Tetris](https://en.wikipedia.org/wiki/Tetris)
+with some variants. In the classic game, all of the pieces are made of four squares.
 In this version (designed for a homework in the course "Programming Languages"
 by University of Washington) there are two five-squares pieces,
 a three-square piece and a cheat piece (one square).
 
-How to play? The game is designed for playing with the keyboard.
+## How to play
 
-The control keys are:
+The game is designed for playing with the keyboard. Control keys are:
 
 - Left: move the current block a position to the left.
 - Right: move the current block a position to the right.
@@ -24,8 +24,7 @@ The control keys are:
 
 The game ends according the classic game rule for ending.
 
-System requirements:
-- C++ v14
-- Qt5
+## Requirements
 
-Enjoy it!
+- C++ v14 or higher
+- Qt5
