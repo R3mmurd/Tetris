@@ -1,30 +1,21 @@
-# Tetris
+MIT License
 
-This is a remake of the classic game [Tetris](https://en.wikipedia.org/wiki/Tetris)
-with some variants. In the classic game, all of the pieces are made of four squares.
-In this version (designed for a homework in the course "Programming Languages"
-by University of Washington) there are two five-squares pieces,
-a three-square piece and a cheat piece (one square).
+Copyright (c) 2016 Alejandro J. Mujica (aledrums@gmail.com)
 
-## How to play
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The game is designed for playing with the keyboard. Control keys are:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-- Left: move the current block a position to the left.
-- Right: move the current block a position to the right.
-- Up: rotates the current block counterclock wise.
-- Down: rotates the current block clock wise.
-- U: rotates the current block 180º.
-- Space bar: drop the current block. It counts for your score.
-- C: Try to make cheat. It means, if your score is greater than 100 points,
-  then the next piece will be the cheat piece and you'll be penalized with 100
-  points less in your score.
-- P: pause or resume game.
-- R: reinit the game when it has finished.
-
-The game ends according the classic game rule for ending.
-
-## Requirements
-
-- C++ v14 or higher
-- Qt5
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
