@@ -8,17 +8,15 @@
 # include <QPainter>
 # include <QKeyEvent>
 
-const size_t BoardCanvas::MIN_TIME_INTERVAL = 40;
-const size_t BoardCanvas::BASE_INTERVAL = 1000;
-
 BoardCanvas::BoardCanvas(QWidget * parent)
   : QWidget(parent), board(30, 15)
 {
-  setFixedSize(board.cols() * Board::Scale, board.rows() * Board::Scale);
+  setFixedSize(board.cols() * Board::SCALE, board.rows() * Board::SCALE);
 
   timer.setInterval(BASE_INTERVAL);
   connect(&timer, SIGNAL(timeout()), this, SLOT(slot_timer_timeout()));
   timer.start();
+  time.start();
 }
 
 void BoardCanvas::paintEvent(QPaintEvent *)
@@ -69,7 +67,7 @@ void BoardCanvas::handle_input(QKeyEvent * evt)
     {
     case Qt::Key_Right: board.move_right(); break;
     case Qt::Key_Left: board.move_left(); break;
-    case Qt::Key_Down: board.rotate_right(); break;
+    case Qt::Key_Down: board.move_down(); break;
     case Qt::Key_Up: board.rotate_left(); break;
     case Qt::Key_Space:
       board.drop();
@@ -90,6 +88,8 @@ void BoardCanvas::handle_input(QKeyEvent * evt)
 
 void BoardCanvas::slot_timer_timeout()
 {
+  double dt = time.elapsed() / 1000.0;
+  time.restart();
   if (board.is_game_over())
     {
       timer.stop();
@@ -97,10 +97,7 @@ void BoardCanvas::slot_timer_timeout()
       return;
     }
 
-  timer.setInterval(std::max(BASE_INTERVAL - board.get_level() * 80,
-                             MIN_TIME_INTERVAL));
-
-  board.move_down();
+  board.move_down(dt);
   emit signal_cheat(board.cheat());
   emit signal_score(board.get_score(), board.get_level());
   repaint();

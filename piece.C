@@ -70,7 +70,7 @@ bool Piece::move(int di, int dj, int dr)
                              [new_pos, this](const Pos & p) {
       int i = p.first + new_pos.first;
       int j = p.second + new_pos.second;
-      if (i < 0 or j < 0 or i >= board->rows() or j >= board->cols())
+      if (i < 0 or j < 0 or i >= int(board->rows()) or j >= int(board->cols()))
         return true;
       return board->is_busy(i, j);
     });
@@ -88,7 +88,7 @@ void Piece::draw(QPainter & painter)
 {
   painter.setBrush(color);
   for (const Pos & p : get_current_rotation())
-    painter.drawRect((p.second + base_pos.second) * Board::Scale,
-                     (p.first + base_pos.first) * Board::Scale,
-                     Board::Scale, Board::Scale);
+    painter.drawRect((p.second + base_pos.second) * Board::SCALE,
+                     (p.first + base_pos.first) * Board::SCALE,
+                     Board::SCALE, Board::SCALE);
 }

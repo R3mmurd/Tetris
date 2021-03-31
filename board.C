@@ -11,6 +11,10 @@
 # include <allpieces.H>
 # include <board.H>
 
+const size_t Board::SCALE = 20;
+const double Board::INITIAL_MOVE_DOWN_DELAY = 1.0;
+const double Board::MINIMUM_MOVE_DOWN_DELAY = 0.04;
+
 void Board::allocate()
 {
   mat = new Bucket * [num_rows];
@@ -31,6 +35,8 @@ void Board::update_level()
 {
   size_t new_level = score / 1000;
   level = std::max(level, new_level);
+  move_down_delay = std::max(INITIAL_MOVE_DOWN_DELAY - level * 0.08,
+                             MINIMUM_MOVE_DOWN_DELAY);
 }
 
 bool Board::is_line(size_t i)
@@ -157,7 +163,7 @@ void Board::set(size_t i, size_t j, const QColor & c)
 
 void Board::draw(QPainter & painter, bool is_paused)
 {
-  painter.fillRect(0, 0, num_cols * Scale, num_rows * Scale, Qt::darkGray);
+  painter.fillRect(0, 0, num_cols * SCALE, num_rows * SCALE, Qt::darkGray);
 
   if (is_paused)
     return;
@@ -170,7 +176,7 @@ void Board::draw(QPainter & painter, bool is_paused)
         if (not is_busy(y, x))
           continue;
         painter.setBrush(mat[y][x].color);
-        painter.drawRect(x * Scale, y * Scale, Scale, Scale);
+        painter.drawRect(x * SCALE, y * SCALE, SCALE, SCALE);
       }
 }
 
@@ -206,6 +212,17 @@ void Board::move_down()
 
   store_current();
   block_bottom_sound->play();
+}
+
+void Board::move_down(double dt)
+{
+  move_down_timer += dt;
+  if (move_down_timer < move_down_delay)
+    return;
+
+  move_down_timer = 0.0;
+
+  move_down();
 }
 
 void Board::drop()

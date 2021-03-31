@@ -10,19 +10,19 @@ a three-square piece and a cheat piece (one square).
 
 The game is designed for playing with the keyboard. Control keys are:
 
-- Left: move the current block a position to the left.
-- Right: move the current block a position to the right.
-- Up: rotates the current block counterclock wise.
-- Down: rotates the current block clock wise.
+- Left arrow: move the current block a position to the left.
+- Right arrow: move the current block a position to the right.
+- Up arrow: rotates the current block counterclockwise.
+- Down arrow: move the current block down a position.
 - U: rotates the current block 180º.
 - Space bar: drop the current block. It counts for your score.
-- C: Try to make cheat. It means, if your score is greater than 100 points,
+- C: Try to make cheat. It means if your score is greater than 100 points,
   then the next piece will be the cheat piece and you'll be penalized with 100
   points less in your score.
-- P: pause or resume game.
-- R: reinit the game when it has finished.
+- P: pause or resume the game.
+- R: restart the game when it has finished.
 
-The game ends according the classic game rule for ending.
+he game ends according to the classic game rule for ending.
 
 ## Requirements
 

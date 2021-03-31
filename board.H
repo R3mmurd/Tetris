@@ -19,7 +19,9 @@ class QPainter;
 class Board
 {
 public:
-  static constexpr size_t Scale = 20;
+  static const size_t SCALE;
+  static const double INITIAL_MOVE_DOWN_DELAY;
+  static const double MINIMUM_MOVE_DOWN_DELAY;
 
   struct Bucket
   {
@@ -38,6 +40,9 @@ private:
   bool game_over = false;
   bool _cheat = false;
   Piece current_block;
+
+  double move_down_timer = 0.0;
+  double move_down_delay = INITIAL_MOVE_DOWN_DELAY;
 
   void allocate();
 
@@ -95,6 +100,8 @@ public:
   void move_left();
 
   void move_down();
+
+  void move_down(double dt);
 
   void drop();
 

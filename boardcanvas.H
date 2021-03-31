@@ -10,6 +10,7 @@
 # include <QWidget>
 
 # include <board.H>
+# include <QTime>
 # include <QTimer>
 
 class BoardCanvas : public QWidget
@@ -19,9 +20,9 @@ class BoardCanvas : public QWidget
   Board board;
 
   QTimer timer;
+  QTime time;
 
-  static const size_t MIN_TIME_INTERVAL;
-  static const size_t BASE_INTERVAL;
+  static constexpr size_t BASE_INTERVAL = 33;
 
   bool pause = false;
 
